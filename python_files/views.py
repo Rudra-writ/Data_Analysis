@@ -18,7 +18,7 @@ def first_page(request):
                 if(form.is_valid()):
                         parameter = form.cleaned_data.get("filters")
                         print(parameter)
-                        if(len(parameter)<=7):
+                        if(len(parameter)<=6):
                             shutil.copy2("P:\\Test_Log.csv", "P:\\project\\newproject\\newproject\\static\\Test_Log.csv") 
                            
                             df = pd.read_csv('P:\SLM_Analyzer\slmAnalyst\static\Sensor.csv', sep = ",|;", engine = 'python')
@@ -36,16 +36,17 @@ def first_page(request):
                             columns = list(df)
                             df = df.apply(pd.to_numeric, errors = 'coerce')
                         
-                            fig,ax = plt.subplots()
-                            colors = ['b', 'y', 'g', 'r', 'm', 'c', 'k']
+                            colors = ['b', 'y', 'g', 'r', 'm', 'c']
                             for params, index in zip(parameter, range(len(parameter))):
-                                    ax.plot( df['Time[s]'], df[params], color = colors[index] , label = params)
-                            plt.xlabel("Time in seconds")
-                            plt.ylabel(',  '.join(str(params) for params in parameter) )
-                            plt.title(',  '.join(str(params) for params in parameter)  + " Vs Time[s]")
-                            ax.legend()
+                                plt.figure(1, figsize=(15, 5))
+                                plt.subplot(len(parameter),1,index+1)
+                                plt.plot(df['Time[s]'], df[params], color = colors[index] , label = df[params])
+                                plt.xlabel("Time in seconds")
+                                plt.ylabel( params)
+
                             plt.show()
-                            print(df.head(50))
+
+
                             
                             return render(request,'first_page.html',context)
                                     
