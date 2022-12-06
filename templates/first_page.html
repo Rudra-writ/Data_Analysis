@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Plotter
+        </title>
+        <meta charset="UTF-8">
+    
+        {% load static %}  
+        <meta charset="UTF-8">
+    {% load static %}  
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" > 
+    <link href="{% static 'insert_records.css' %}" rel="stylesheet" >
+
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+        <style>
+         a:link, a:visited {
+      background-color: transparent;
+      color: black;
+      border: 1px solid rgb(3, 17, 83);
+      padding: 5px 12px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+    }
+    
+    a:hover, a:active {
+      background-color: rgb(41, 69, 226);
+      color: black;
+    }
+        </style>
+
+    </head>
+
+    
+    <body id = "grad" class = "bg-image hover-overlay">
+        <center>
+          <div id = "heading" >
+           
+        <h1 > Plotter </h1>
+        
+        </div>
+    
+    </br>
+
+    
+        <form action="{% url "first_page" %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+        
+        </br>
+          </br>
+            <h5 style = "font-family: monospace;"> Select Parameters (MAX 7):</h5>
+        
+            {{form.as_p}}
+            <input type='submit' value='Plot'  class = "btn btn-outline-success" name='plot'>
+          </br>
+
+        </br>
+    </br>
+</br>
+</br>
+</br>  
+               
+        </form>
+               
+    </center>
+       
+    </body>
+</html>
